@@ -1,5 +1,6 @@
 <template>
     <button @click="handleCadastrarProduct">cadastrar produto</button>
+    <button @click="handleCadastrarCustomer">cadastrar cliente</button>
     <table border="1" cellpadding="20" cellspacing="0" style="width: 100%;">
         <thead>
             <tr>
@@ -51,5 +52,9 @@ async function handleEditProduct(id: number) {
 
 function handleCadastrarProduct() {
     router.push({ name: 'novo-produto' });
+}
+
+function handleCadastrarCustomer() {
+    router.push({ name: 'novo-cliente' });
 }
 </script>
