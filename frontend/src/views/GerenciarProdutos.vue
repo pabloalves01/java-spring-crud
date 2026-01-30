@@ -17,7 +17,7 @@
                 <td>{{ produto.estoque }}</td>
                 <td>
                     <button>Editar</button>
-                    <button @click="deletarProduto(produto.id!)">Excluir</button>
+                    <button @click="handleDeleteProduct(produto.id!)">Excluir</button>
                 </td>
             </tr>
         </tbody>
@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { Produto, listarProdutos } from '../services/produtoService';
+import { Produto, listarProdutos, deletarProduto } from '../services/produtoService';
 
 const produtos = ref<Produto[]>([]);
 
@@ -35,9 +35,8 @@ onMounted(async () => {
     produtos.value = response.data;
 });
 
-async function deletarProduto(id: number) {
+async function handleDeleteProduct(id: number) {
     await deletarProduto(id);
-    produtos.value = produtos.value.filter(produto => produto.id !== id);
+    produtos.value.filter(p => p.id != id);
 }
-
 </script>
