@@ -8,5 +8,5 @@
     "jsx": "preserve",
     "types": ["vite/client"]      // ⚡ Diz pro TS que import.meta.env existe
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "src/views/NovoProduto"]
 }

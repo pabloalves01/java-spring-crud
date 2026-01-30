@@ -1,13 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ProdutosView from '../views/ProdutosView.vue'
+import NovoProduto from '../views/NovoProduto.vue'
+import GerenciarProdutos from '../views/GerenciarProdutos.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'produtos',
-      component: ProdutosView,
+      name: 'gerenciar-produtos',
+      component: GerenciarProdutos,
+    },
+    {
+      path: '/produtos/cadastrar',
+      name: 'novo-produto',
+      component: NovoProduto,
     },
   ],
 })
