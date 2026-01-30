@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",          // ⚡ Importante: 'esnext' permite import.meta
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "jsx": "preserve",
+    "types": ["vite/client"]      // ⚡ Diz pro TS que import.meta.env existe
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"]
+}
