@@ -2,6 +2,7 @@ package br.com.dev.controller;
 
 import br.com.dev.entity.Produto;
 import br.com.dev.repository.ProdutoRepository;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,6 +35,12 @@ public class ProdutoController {
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id) {
         repository.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public Produto atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+        produto.setId(id);
+        return repository.save(produto);
     }
 
 }

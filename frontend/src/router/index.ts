@@ -15,6 +15,11 @@ const router = createRouter({
       name: 'novo-produto',
       component: NovoProduto,
     },
+    {
+      path: '/produtos/editar/:id',
+      name: 'editar-produto',
+      component: NovoProduto,
+    }
   ],
 })
 

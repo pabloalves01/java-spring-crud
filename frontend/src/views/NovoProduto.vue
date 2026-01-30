@@ -1,29 +1,66 @@
 <template>
   <div>
-    <h1>Cadastrar Produto</h1>
+    <h1>Cadastrar Produto {{ productId || '' }}</h1>
 
-    <input v-model="nome" placeholder="Nome" />
-    <input v-model="preco" type="number" placeholder="Preço" />
+    <input v-model="produto.nome" placeholder="Nome" />
+    <input v-model="produto.preco" type="number" placeholder="Preço" />
 
-    <button @click="salvar">Salvar</button>
+    <button @click="isEditing ? atualizar() : cadastrar()">Salvar</button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { criarProduto } from '../services/produtoService'
+import { useRoute } from 'vue-router'
+import { Produto, buscarProduto, atualizarProduto } from '../services/produtoService'
+import router from '../router';
 
-const nome = ref('')
-const preco = ref<number | null>(null)
+const route = useRoute();
+const isEditing = ref(false);
 
-async function salvar() {
+const produto = ref<Produto>({
+  nome: '',
+  preco: 0,
+  estoque: 0,
+})
+
+onMounted(() => {
+  if (isEditing.value) {
+    fetchProduct(productId.value);
+  }
+});
+
+async function fetchProduct(id: number) {
+  const response = await buscarProduto(id);
+  produto.value = response.data;
+}
+
+async function cadastrar() {
   await criarProduto({
-    nome: nome.value,
-    preco: Number(preco.value),
+    nome: produto.value.nome,
+    preco: Number(produto.value.preco),
     estoque: 999,
   });
-  nome.value = ''
-  preco.value = null
+  produto.value.nome = ''
+  produto.value.preco = 0
   alert('Salvo!')
+  router.push({ name: 'gerenciar-produtos' });
 }
+
+async function atualizar() {
+  try {
+    await atualizarProduto(produto.value);
+    alert('Atualizado!')
+    router.push({ name: 'gerenciar-produtos' });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+const productId = computed(() => {
+  isEditing.value = route.params.id !== undefined;
+  return Number(route.params.id);
+})
+
 </script>

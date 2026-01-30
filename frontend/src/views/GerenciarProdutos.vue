@@ -1,4 +1,5 @@
 <template>
+    <button @click="handleCadastrarProduct">cadastrar produto</button>
     <table border="1" cellpadding="20" cellspacing="0" style="width: 100%;">
         <thead>
             <tr>
@@ -16,7 +17,7 @@
                 <td>{{ produto.preco }}</td>
                 <td>{{ produto.estoque }}</td>
                 <td>
-                    <button>Editar</button>
+                    <button @click="handleEditProduct(produto.id!)">Editar</button>
                     <button @click="handleDeleteProduct(produto.id!)">Excluir</button>
                 </td>
             </tr>
@@ -27,6 +28,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { Produto, listarProdutos, deletarProduto } from '../services/produtoService';
+import router from '../router';
 
 const produtos = ref<Produto[]>([]);
 
@@ -36,7 +38,18 @@ onMounted(async () => {
 });
 
 async function handleDeleteProduct(id: number) {
-    await deletarProduto(id);
-    produtos.value.filter(p => p.id != id);
+    const confirm = await window.confirm('Tem certeza que deseja deletar este produto?');
+    if (confirm) {
+        await deletarProduto(id);
+        produtos.value = produtos.value.filter((p: Produto) => p.id != id);
+    }
+}
+
+async function handleEditProduct(id: number) {
+    router.push({ name: 'editar-produto', params: { id } });
+}
+
+function handleCadastrarProduct() {
+    router.push({ name: 'novo-produto' });
 }
 </script>

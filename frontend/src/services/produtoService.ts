@@ -24,6 +24,15 @@ export function listarProdutos() {
 }
 
 /**
+ * Busca um produto pelo ID
+ * @param id ID do produto
+ * @returns Produto encontrado
+ */
+export function buscarProduto(id: number) {
+    return api.get<Produto>(`/produtos/${id}`);
+}
+
+/**
  * Cria um novo produto
  * @param produto Produto a ser criado
  * @returns Produto criado
