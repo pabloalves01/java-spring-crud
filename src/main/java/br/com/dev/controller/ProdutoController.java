@@ -1,7 +1,7 @@
-package br.com.dev.dev.controller;
+package br.com.dev.controller;
 
-import br.com.dev.dev.entity.Produto;
-import br.com.dev.dev.repository.ProdutoRepository;
+import br.com.dev.entity.Produto;
+import br.com.dev.repository.ProdutoRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

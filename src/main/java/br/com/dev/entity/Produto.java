@@ -1,4 +1,4 @@
-package br.com.dev.dev.entity;
+package br.com.dev.entity;
 
 import jakarta.persistence.*;
 
