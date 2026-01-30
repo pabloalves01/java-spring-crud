@@ -12,11 +12,13 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { criarProduto } from '../services/produtoService'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { Produto, buscarProduto, atualizarProduto } from '../services/produtoService'
-import router from '../router';
 
 const route = useRoute();
+const router = useRouter();
+
+
 const isEditing = ref(false);
 
 const produto = ref<Produto>({
