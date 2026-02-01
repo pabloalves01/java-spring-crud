@@ -1,8 +1,11 @@
 package br.com.abacatepay.controller;
 
 import br.com.abacatepay.dto.CustomerRequest;
+import br.com.abacatepay.dto.CustomerListItem;
 import br.com.abacatepay.service.CustomerService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -23,4 +26,11 @@ public class CustomerController {
                 request.getTaxId()
         );
     }
+    
+    @GetMapping("/list")
+    public List<CustomerListItem> listarClientes() {
+        return customerService.listarClientes();
+    }
+    
+    
 }

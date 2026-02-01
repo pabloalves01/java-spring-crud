@@ -2,10 +2,14 @@ package br.com.abacatepay.service;
 
 import br.com.abacatepay.dto.CustomerRequest;
 import br.com.abacatepay.AbacatePayConfig;
+import br.com.abacatepay.dto.CustomerListItem;
+import br.com.abacatepay.dto.CustomerListResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import java.util.List;
 
 @Service
 public class CustomerService {
@@ -29,6 +33,23 @@ public class CustomerService {
         } else {
             throw new RuntimeException("Failed to create customer: " + response.getBody());
         }
+    }
+
+    public List<CustomerListItem> listarClientes() {
+        String url = config.getBaseUrl() + "/customer/list";
+        HttpEntity<Void> request = new HttpEntity<>(config.buildHeaders());
+
+        ResponseEntity<CustomerListResponse> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                request,
+                CustomerListResponse.class);
+
+        if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+            List<CustomerListItem> data = response.getBody().getData();
+            return data != null ? data : List.of();
+        }
+        throw new RuntimeException("Falha ao listar clientes: " + (response.getBody() != null ? response.getBody().getError() : response.getStatusCode()));
     }
 
 }

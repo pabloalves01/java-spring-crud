@@ -1,6 +1,7 @@
 <template>
     <button @click="handleCadastrarProduct">cadastrar produto</button>
     <button @click="handleCadastrarCustomer">cadastrar cliente</button>
+    <button @click="handleListarClientes">listar clientes</button>
     <table border="1" cellpadding="20" cellspacing="0" style="width: 100%;">
         <thead>
             <tr>
@@ -56,5 +57,9 @@ function handleCadastrarProduct() {
 
 function handleCadastrarCustomer() {
     router.push({ name: 'novo-cliente' });
+}
+
+function handleListarClientes() {
+    router.push({ name: 'gerenciar-clientes' });
 }
 </script>

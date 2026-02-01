@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import NovoProduto from '../views/NovoProduto.vue'
 import GerenciarProdutos from '../views/GerenciarProdutos.vue'
 import NovoCliente from '../views/NovoCliente.vue'
+import GerenciarClientes from '../views/GerenciarClientes.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +21,11 @@ const router = createRouter({
       path: '/produtos/editar/:id',
       name: 'editar-produto',
       component: NovoProduto,
+    },
+    {
+      path: '/clientes',
+      name: 'gerenciar-clientes',
+      component: GerenciarClientes,
     },
     {
       path: '/clientes/cadastrar',
